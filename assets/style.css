@@ -1,7 +1,18 @@
-.row {
-    border: 2px solid red
+* {
+    box-sizing: border-box;
+    margin: 10px;
 }
 
-.col {
+.row, [class*="row-"] {
+    border: 2px solid red;
+}
+
+/* This selects all the columns in Bootstrap for better display */
+.col, [class*="col-"] {
     border: 2px solid blue;
+    text-align: center;
+}
+
+.one-column {
+    margin: 10px auto;
 }

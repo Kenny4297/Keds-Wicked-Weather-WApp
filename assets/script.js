@@ -16,7 +16,7 @@ const futureForecastButton = document.getElementById("future-forecast-button");
 
 
 //Get the current day's forecast
-const returnCurrentForecast = async () => {
+const returnCurrentForecast = async (event) => {
     event.preventDefault();
     const userPicksCity = document.getElementById("input-bar").value;
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${userPicksCity}&appid=${apiKey}&units=imperial`;
@@ -51,7 +51,7 @@ const returnCurrentForecast = async () => {
     }
 };
 
-submitButton.addEventListener('click', () => returnCurrentForecast());
+submitButton.addEventListener('click', returnCurrentForecast);
 
 // Get the next five Days Forecast
 const returnFiveDayForecast = async () => {

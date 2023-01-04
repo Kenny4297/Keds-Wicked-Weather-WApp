@@ -16,3 +16,13 @@
 .one-column {
     margin: 10px auto;
 }
+
+.hidden {
+    display: none;
+}
+
+#future-information {
+    display: flex;
+    justify-content: space-evenly;
+    color: green;
+}

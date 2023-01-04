@@ -1,23 +1,31 @@
 const apiKey = '0c8087e93b7bd6b5e9d6fbd5daee1b51';
 
 //DOM variables
+const body = document.getElementsByTagName("body");
 const todaysWeather = document.getElementById("todays-weather");
 const cityName = document.getElementById("display-city-name");
 const temperature = document.getElementById("display-temperature");
 const dailyHigh = document.getElementById("display-daily-high");
 const dailyLow = document.getElementById("display-daily-low");
 const skies = document.getElementById("display-skies")
-const humidity = document.getElementById("display-humidity")
+const humidity = document.getElementById("display-humidity");
+const futureInformation = document.getElementById("future-information");
+const currentWeather = document.querySelector(".current-weather");
+const futureInformationSection = document.querySelector(".future-information-section")
 
 //Buttons
 const submitButton = document.getElementById("submit");
 const userInput = document.getElementById("input-bar");
 const futureForecastButton = document.getElementById("future-forecast-button");
 
+//Resting Home Page
+currentWeather.classList.add("hidden");
+futureInformationSection.classList.add("hidden");
 
 //Get the current day's forecast
 const returnCurrentForecast = async (event) => {
     event.preventDefault();
+    currentWeather.classList.remove("hidden");
     const userPicksCity = document.getElementById("input-bar").value;
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${userPicksCity}&appid=${apiKey}&units=imperial`;
     console.log("Event Listener firing!")
@@ -52,27 +60,62 @@ const returnCurrentForecast = async (event) => {
 };
 
 submitButton.addEventListener('click', returnCurrentForecast);
-
 // Get the next five Days Forecast
-const returnFiveDayForecast = async () => {
+const returnFiveDayForecast = async (event) => {
+    console.log("firing")
     event.preventDefault();
+    futureInformationSection.classList.remove("hidden");
     const userPicksCity = document.getElementById("input-bar").value;
     console.log(userPicksCity);
-    const url = `https://api.openweathermap.org/data/2.5/forecast/daily?q=${userPicksCity}&cnt=5&appid=${apiKey}`;
+    const url = `https://api.openweathermap.org/data/2.5/forecast?q=${userPicksCity}&appid=${apiKey}&units=imperial`;
     console.log(`future forecast event listener firing`)
     try {
         response = await fetch(url);
         data = await response.json();
         console.log(data);
-        // let generatedCol = '';
-        //HOW TO GET THE FIRST 5 DAYS Forecast
-            //Temperature -> data.list[count].
-    } catch (error) {
+        //Array 4 is noon for the next day, (+8 for each day noon data)
+        // BELOW WORKS WITHOUT ADDING ANYTHING TO THE HTML
+        let generatedCols = '';
+        // for (let i = 4; i <= 36; i += 8 ) {
+        //     //Date: data.list[#of 3hours intervals].dt_text
+        //     console.log(data.list[i].dt_txt)
+
+        //     //Temperature: data.list[4].main.temp
+        //     console.log(data.list[i].main.temp)
+
+        //     //Daily High: data.list[i].main.temp_max
+        //     console.log(data.list[i].main.temp_max)
+
+        //     //Daily Low: data.list[i].main.temp_min
+        //     console.log(data.list[i].main.temp_min)
+
+        //     //Skies: data.list[i].weather[0].description
+        //     console.log(data.list[i].weather[0].description)
+
+        //     //Humidity: data.list[i].main.humidity
+        //     console.log(data.list[i].main.humidity)
+        // }
+        for (let i = 4; i <= 36; i += 8 ) {
+            generatedCols+= 
+                `<div class="col-2">
+                        <p>Date: ${data.list[i].dt_txt}</p>
+                        <p>Temperature: ${data.list[i].main.temp}</p>
+                        <p>Daily High: ${data.list[i].main.temp_max}</p>
+                        <p>Daily Low: ${data.list[i].main.temp_min}</p>
+                        <p>Skies: ${data.list[i].weather[0].description}</p>
+                        <p>Humidity: ${data.list[i].main.humidity}</p>
+                    </div>
+                `;
+            console.log(generatedCols);
+
+            futureInformation.innerHTML = generatedCols;
+            }
+        } catch (error) {
         console.log("Sorry this didn't work")
     }
 };
 
-futureForecastButton.addEventListener('click', () => returnFiveDayForecast());
+futureForecastButton.addEventListener('click', returnFiveDayForecast);
 
 
 

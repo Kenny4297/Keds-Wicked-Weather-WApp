@@ -13,7 +13,7 @@
 
   <!-- Header -->
   <body>
-    <div class="container">
+    <div class="container-fluid">
       <div class="row">
         <div class="col">
           <h1>Ked's Wicked Weather WApp</h1>
@@ -22,16 +22,22 @@
       </div>
     </div>
 
-    <div class="container">
+    <div class="container-fluid input-section">
       <div class="row">
         <div class="col">
-          <form>
-            <p>Enter the city and country name</p>
-            <p><em>Example: Caguas, Puerto Rico</em></p>
-                <input type="text" id="input-bar"/>
-            <p><button id="submit">Today's Weather</button></p>
-            <p><button id="future-forecast-button">Future Forecast</button></p>
-        </form>
+          <div class="input-section-data">
+            <form id="form">
+              <h2>Enter the city and country name</h2>
+              <p><em>Example: Caguas, Puerto Rico</em></p>
+                  <input type="text" id="input-bar"/>
+              <p><button id="submit">Today's Weather</button></p>
+              <p><button id="future-forecast-button">Future Forecast</button></p>
+              <p><select name="history" id="history">
+                <option id="history-dropdown">--Choose Previous Selection--</option>
+                  
+              </select></p>
+            </form>
+          </div>
         </div>
       </div>
     </div>

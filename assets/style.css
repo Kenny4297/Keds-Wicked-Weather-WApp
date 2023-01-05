@@ -13,6 +13,14 @@
     text-align: center;
 }
 
+body {
+    outline: 2px solid orange;
+}
+
+.container {
+    outline: 2px solid purple;
+}
+
 .one-column {
     margin: 10px auto;
 }
@@ -25,4 +33,22 @@
     display: flex;
     justify-content: space-evenly;
     color: green;
+}
+
+.input-section {
+    background-image: url(./images/Nature-Backgrounds.jpg);
+    background-size: cover;
+    background-position: center;
+    color: black;
+}
+
+.input-section-data {
+    margin: 0 auto;
+    outline: 2px solid purple;
+    width: 30%;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    background-color: aliceblue;
+    opacity: .9;
 }

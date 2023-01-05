@@ -11,7 +11,11 @@ const skies = document.getElementById("display-skies")
 const humidity = document.getElementById("display-humidity");
 const futureInformation = document.getElementById("future-information");
 const currentWeather = document.querySelector(".current-weather");
-const futureInformationSection = document.querySelector(".future-information-section")
+const futureInformationSection = document.querySelector(".future-information-section");
+// const historyDropDown = document.getElementById("history-dropdown");
+const historyDropDown = document.getElementById("history");
+let historyOption = document.createElement("option");
+
 
 //Buttons
 const submitButton = document.getElementById("submit");
@@ -21,6 +25,25 @@ const futureForecastButton = document.getElementById("future-forecast-button");
 //Resting Home Page
 currentWeather.classList.add("hidden");
 futureInformationSection.classList.add("hidden");
+
+const addToHistory = () => {
+    const userPicksCity = document.getElementById("input-bar").value;
+    console.log(`User picks city: ${userPicksCity}`)
+
+    let historyOption = document.createElement("option");
+    console.log(`HistoryOption: ${historyOption}`);
+
+    historyOption.innerHTML = `<option id='specific-history-item'>${userPicksCity}</option>`;
+    historyDropDown.appendChild(historyOption);
+}
+
+const historyToInput = (event) => {
+    userInput.value = event.target;
+}
+
+historyOption.addEventListener('click', historyToInput)
+
+
 
 //Get the current day's forecast
 const returnCurrentForecast = async (event) => {
@@ -54,6 +77,7 @@ const returnCurrentForecast = async (event) => {
 
 
         //Display the current 'forecast' (rain, sen, ect)
+        addToHistory();
     } catch (error) {
         console.log("This didn't work")
     }
@@ -95,7 +119,7 @@ const returnFiveDayForecast = async (event) => {
         //     //Humidity: data.list[i].main.humidity
         //     console.log(data.list[i].main.humidity)
         // }
-        for (let i = 4; i <= 36; i += 8 ) {
+        for (let i = 3; i <= 36; i += 8 ) {
             generatedCols+= 
                 `<div class="col-2">
                         <p>Date: ${data.list[i].dt_txt}</p>
@@ -116,6 +140,8 @@ const returnFiveDayForecast = async (event) => {
 };
 
 futureForecastButton.addEventListener('click', returnFiveDayForecast);
+
+
 
 
 

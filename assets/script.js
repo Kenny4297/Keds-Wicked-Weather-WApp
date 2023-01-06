@@ -58,7 +58,6 @@ const historyToInput = (event) => {
 
 historyOption.addEventListener('click', historyToInput)
 
-
 //Get the current day's forecast
 const returnCurrentForecast = async (event) => {
     event.preventDefault();

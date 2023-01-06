@@ -35,8 +35,8 @@ body {
     display: none;
 }
 
-#future-information {
-    display: flex;
+.future-information-section {
+    display: none;
     justify-content: space-evenly;
     color: green;
 }
@@ -51,10 +51,14 @@ body {
 .input-section-data {
     margin: 0 auto;
     outline: 2px solid purple;
-    width: 30%;
+    width: 60%;
     margin-top: 10px;
     margin-bottom: 20px;
     border-radius: 10px;
     background-color: aliceblue;
     opacity: .9;
+}
+
+#form {
+    display: block;
 }

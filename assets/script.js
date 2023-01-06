@@ -29,27 +29,27 @@ futureInformationSection.classList.add("hidden");
 let count = 0;
 let arrayOfHistoryItems = [];
 
-const addToHistory = () => {
-    const userPicksCity = document.getElementById("input-bar").value;
-    // console.log(`User picks city: ${userPicksCity}`)
+// const addToHistory = () => {
+//     const userPicksCity = document.getElementById("input-bar").value;
+//     // console.log(`User picks city: ${userPicksCity}`)
 
-    let historyOption = document.createElement("option");
-    // console.log(`HistoryOption: ${historyOption}`);
+//     let historyOption = document.createElement("option");
+//     // console.log(`HistoryOption: ${historyOption}`);
 
-    historyOption.innerHTML = `<option id='${count}'>${userPicksCity}</option>`;
-    // historyOption.innerHTML = `class='specific-history-item'>${userPicksCity}`;
+//     historyOption.innerHTML = `<option id='${count}'>${userPicksCity}</option>`;
+//     // historyOption.innerHTML = `class='specific-history-item'>${userPicksCity}`;
 
-    historyDropDown.appendChild(historyOption);
-    arrayOfHistoryItems.push(historyOption);
+//     historyDropDown.appendChild(historyOption);
+//     arrayOfHistoryItems.push(historyOption);
 
-    count++
+//     count++
 
-    historyDropDown.addEventListener('click', (event) => {
-        console.log("historyToInput event listener firing")
-        let element = event.target;
-        returnCurrentForecast(element);
-    })
-}   
+//     historyDropDown.addEventListener('click', (event) => {
+//         console.log("historyToInput event listener firing")
+//         let element = event.target;
+//         returnCurrentForecast(element);
+//     })
+// }   
 
 const historyToInput = (event) => {
     //Get the value of the drop down bar and add an event listener to it
@@ -61,7 +61,12 @@ historyOption.addEventListener('click', historyToInput)
 //Get the current day's forecast
 const returnCurrentForecast = async (event) => {
     event.preventDefault();
+
+    //Add or remove the type of section for the weather
+    // futureInformationSection.classList.add("hidden");
+    futureInformationSection.style.display = "none";
     currentWeather.classList.remove("hidden");
+
     const userPicksCity = document.getElementById("input-bar").value;
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${userPicksCity}&appid=${apiKey}&units=imperial`;
     // console.log("Event Listener firing!")
@@ -69,37 +74,52 @@ const returnCurrentForecast = async (event) => {
     try {
         response = await fetch(url);
         data = await response.json();
-        // console.log(data);
+        console.log(data);
         //Display the title
         todaysWeather.innerText = "Todays Weather:"
 
         //Display the current temperature
         temperature.innerText = `Current Temperature (F): ${data.main.temp}`;
+        console.log(data.main.temp)
 
         //Display the daily high
         dailyHigh.innerText = `High: ${data.main.temp_max}`
+        console.log(data.main.temp_max)
 
         //Display the daily Low
         dailyLow.innerText = `Low: ${data.main.temp_min}`
+        console.log(data.main.temp_min)
 
         //Display the skies
         skies.innerText = `Skies: ${data.weather[0].description}`
+        console.log(data.weather[0].description)
 
         //Display Humidity
         humidity.innerText = `Humidity: ${data.main.humidity}%`
+        console.log(data.main.humidity)
 
-        addToHistory();
+        // addToHistory();
     } catch (error) {
         console.log("This didn't work")
     }
 };
 
 submitButton.addEventListener('click', returnCurrentForecast);
+
+
+
+
 // Get the next five Days Forecast
 const returnFiveDayForecast = async (event) => {
     console.log("firing")
     event.preventDefault();
-    futureInformationSection.classList.remove("hidden");
+
+    //Add or remove today's forecast
+    currentWeather.classList.add("hidden")
+    // futureInformationSection.classList.remove("hidden");
+    futureInformationSection.style.display = 'flex'
+    console.log(currentWeather.style)
+
     const userPicksCity = document.getElementById("input-bar").value;
     console.log(userPicksCity);
     const url = `https://api.openweathermap.org/data/2.5/forecast?q=${userPicksCity}&appid=${apiKey}&units=imperial`;
@@ -143,7 +163,7 @@ const returnFiveDayForecast = async (event) => {
                 `;
             // console.log(generatedCols);
 
-            futureInformation.innerHTML = generatedCols;
+            futureInformationSection.innerHTML = generatedCols;
             }
         } catch (error) {
         console.log("Sorry this didn't work")

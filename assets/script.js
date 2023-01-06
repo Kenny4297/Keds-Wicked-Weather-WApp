@@ -39,6 +39,7 @@ const addToHistory = () => {
 
 const historyToInput = (event) => {
     userInput.value = event.target;
+    //How to set the value of this input box when clicked?
 }
 
 historyOption.addEventListener('click', historyToInput)
@@ -75,8 +76,6 @@ const returnCurrentForecast = async (event) => {
         //Display Humidity
         humidity.innerText = `Humidity: ${data.main.humidity}%`
 
-
-        //Display the current 'forecast' (rain, sen, ect)
         addToHistory();
     } catch (error) {
         console.log("This didn't work")
@@ -130,7 +129,7 @@ const returnFiveDayForecast = async (event) => {
                         <p>Humidity: ${data.list[i].main.humidity}</p>
                     </div>
                 `;
-            console.log(generatedCols);
+            // console.log(generatedCols);
 
             futureInformation.innerHTML = generatedCols;
             }

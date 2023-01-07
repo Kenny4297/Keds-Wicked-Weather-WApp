@@ -17,12 +17,11 @@ const historyDropDown = document.getElementById("history");
 let historyOption = document.createElement("option");
 const userInput = document.getElementById("input-bar");
 
-let userPicksCity;
+// let userPicksCity = "test test";
 
 
 //Buttons
 const submitButton = document.getElementById("submit");
-const futureForecastButton = document.getElementById("future-forecast-button");
 
 //Resting Home Page
 // futureInformationSection.classList.add("hidden");
@@ -32,33 +31,56 @@ let count = 0;
 
 let arrayOfHistoryItems = [];
 
-let historyArrayOfButtons = [];
+let historyArrayOfButtons = Array.from([]);
 
+
+//! Old way in case I mess things up
 // const addToHistory = (userPicksCity) => {
-//         console.log("addToHistory function firing")
-//         console.log(`UserPicksCity is: ${userPicksCity}`)
+//                 console.log("addToHistory function firing")
+//                 console.log(`UserPicksCity is: ${userPicksCity}`)
 //     if (!(historyArrayOfButtons.includes(userPicksCity))) {
-//             console.log("If statement check")
-//         historyArrayOfButtons.push(userPicksCity);
-//         console.log(historyArrayOfButtons)
+//                 console.log("If statement check")
+//                 console.log(historyArrayOfButtons)
 //         let historyButton = document.createElement("button");
+//         historyButton.setAttribute("id", `${userPicksCity.split(' ').join("-")}`);
+//         historyArrayOfButtons.push(historyButton);
+//                 console.log(historyButton);
+//                 // console.log(`the History Array of Buttons are: ${historyArrayOfButtons}`);
 //         historyButton.innerText = `${userPicksCity}`;
 //         document.querySelector(".col-12").appendChild(historyButton);
-//     }   
+//     }
 // }
 
+const addToHistory = (userPicksCity) => {
+            console.log("add to history function firing")
+    if (!(historyArrayOfButtons.includes(userPicksCity))) {
+        let button = document.createElement("button");
+        button.setAttribute("id", `${userPicksCity.split(' ').join("-")}`);
+        button.innerText = `${userPicksCity}`;
+        historyArrayOfButtons.push(button);
+                console.log(`History array of buttons: ${historyArrayOfButtons}`);
+        document.querySelector(".col-12").appendChild(button);
+    }
+}
 
+Array.from(historyArrayOfButtons).forEach(button => {
+    console.log("Event listener for history buttons firing")
+    button.addEventListener('click', (event) => {
+        let buttonName = event.target.id;
+        completeWeatherForecast(buttonName);
+    })
+})
 
 //Get the current day's forecast
 const returnCurrentForecast = async (event) => {
     // event.preventDefault();
 
     let userPicksCity = document.getElementById("input-bar").value;
-    console.log(`User picks city line 61 test: ${userPicksCity}`);
+    // console.log(`User picks city line 61 test: ${userPicksCity}`);
 
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${userPicksCity}&appid=${apiKey}&units=imperial`;
-    console.log("Today's Weather Event Listener firing!")
-    console.log(userPicksCity);
+    // console.log("Today's Weather Event Listener firing!")
+    // console.log(userPicksCity);
     try {
         response = await fetch(url);
         data = await response.json();
@@ -111,17 +133,16 @@ const returnCurrentForecast = async (event) => {
 
 // Get the next five Days Forecast
 const returnFiveDayForecast = async (event) => {
-    console.log("firing")
+    // console.log("firing")
     // event.preventDefault();
     
-    const userPicksCity = document.getElementById("input-bar").value;
-    console.log(userPicksCity);
+    let userPicksCity = document.getElementById("input-bar").value;
+    // console.log(userPicksCity);
     const url = `https://api.openweathermap.org/data/2.5/forecast?q=${userPicksCity}&appid=${apiKey}&units=imperial`;
-    console.log(`future forecast event listener firing`)
+    // console.log(`future forecast event listener firing`)
     try {
         response = await fetch(url);
         data = await response.json();
-        console.log(data);
         //Array 4 is noon for the next day, (+8 for each day noon data)
         // BELOW WORKS WITHOUT ADDING ANYTHING TO THE HTML
 
@@ -147,30 +168,22 @@ const returnFiveDayForecast = async (event) => {
     }
 };
 
-futureForecastButton.addEventListener('click', returnFiveDayForecast);
+// futureForecastButton.addEventListener('click', returnFiveDayForecast);
 
-
-// const completeWeatherForecast = async (event) => {
-//     console.log("All promises function call test")
-//     let allPromises = await Promise.all([returnCurrentForecast(), returnFiveDayForecast()]);
-// }
 
 const completeWeatherForecast = async (event) => {
     event.preventDefault();
-    console.log("Complete weather function firing")
+    // console.log("Complete weather function firing")
     let firstPromise = await returnCurrentForecast();
-    console.log(`The first promise returned is: ${firstPromise}`)
+    // console.log(`The first promise returned is: ${firstPromise}`)
     let secondPromise = await returnFiveDayForecast();
-    console.log(`The Second promise returned is ${secondPromise}`);
+    let userPicksCity = document.getElementById("input-bar").value;
+    addToHistory(userPicksCity);
+    // console.log(`User Picks City: ${userPicksCity}`)
 }
 
-//THIS IS WORKING
-// submitButton.addEventListener('click', (event) => {
-//     event.preventDefault();
-//     console.log("Submit button test")
-// });
+submitButton.addEventListener('click', completeWeatherForecast);
 
-submitButton.addEventListener('click', completeWeatherForecast)
 
 
 

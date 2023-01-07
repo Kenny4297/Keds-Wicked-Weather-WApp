@@ -2,24 +2,26 @@ const apiKey = '0c8087e93b7bd6b5e9d6fbd5daee1b51';
 
 //DOM variables
 const body = document.getElementsByTagName("body");
-const todaysWeather = document.getElementById("todays-weather");
-const cityName = document.getElementById("display-city-name");
-const temperature = document.getElementById("display-temperature");
-const dailyHigh = document.getElementById("display-daily-high");
-const dailyLow = document.getElementById("display-daily-low");
-const skies = document.getElementById("display-skies")
-const humidity = document.getElementById("display-humidity");
+// const todaysWeather = document.getElementById("todays-weather");
+// const cityName = document.getElementById("display-city-name");
+// const temperature = document.getElementById("display-temperature");
+// const dailyHigh = document.getElementById("display-daily-high");
+// const dailyLow = document.getElementById("display-daily-low");
+// const skies = document.getElementById("display-skies")
+// const humidity = document.getElementById("display-humidity");
 const futureInformation = document.getElementById("future-information");
 const currentWeather = document.querySelector(".current-weather");
 const futureInformationSection = document.querySelector(".future-information-section");
 // const historyDropDown = document.getElementById("history-dropdown");
 const historyDropDown = document.getElementById("history");
 let historyOption = document.createElement("option");
+const userInput = document.getElementById("input-bar");
+
+let userPicksCity;
 
 
 //Buttons
 const submitButton = document.getElementById("submit");
-const userInput = document.getElementById("input-bar");
 const futureForecastButton = document.getElementById("future-forecast-button");
 
 //Resting Home Page
@@ -49,18 +51,13 @@ let historyArrayOfButtons = [];
 
 //Get the current day's forecast
 const returnCurrentForecast = async (event) => {
-    event.preventDefault();
-
-    //Add or remove the type of section for the weather
-    // futureInformationSection.classList.add("hidden");
-    document.querySelector(".future-forecast").classList.add("hidden");
-    futureInformationSection.style.display = "none";
-    currentWeather.classList.remove("hidden");
+    // event.preventDefault();
 
     let userPicksCity = document.getElementById("input-bar").value;
+    console.log(`User picks city line 61 test: ${userPicksCity}`);
 
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${userPicksCity}&appid=${apiKey}&units=imperial`;
-    // console.log("Event Listener firing!")
+    console.log("Today's Weather Event Listener firing!")
     console.log(userPicksCity);
     try {
         response = await fetch(url);
@@ -112,14 +109,10 @@ const returnCurrentForecast = async (event) => {
     }
 };
 
-
-
-
-
 // Get the next five Days Forecast
 const returnFiveDayForecast = async (event) => {
     console.log("firing")
-    event.preventDefault();
+    // event.preventDefault();
     
     const userPicksCity = document.getElementById("input-bar").value;
     console.log(userPicksCity);
@@ -133,25 +126,6 @@ const returnFiveDayForecast = async (event) => {
         // BELOW WORKS WITHOUT ADDING ANYTHING TO THE HTML
 
         let generatedCols = '';
-        // for (let i = 4; i <= 36; i += 8 ) {
-        //     //Date: data.list[#of 3hours intervals].dt_text
-        //     console.log(data.list[i].dt_txt)
-
-        //     //Temperature: data.list[4].main.temp
-        //     console.log(data.list[i].main.temp)
-
-        //     //Daily High: data.list[i].main.temp_max
-        //     console.log(data.list[i].main.temp_max)
-
-        //     //Daily Low: data.list[i].main.temp_min
-        //     console.log(data.list[i].main.temp_min)
-
-        //     //Skies: data.list[i].weather[0].description
-        //     console.log(data.list[i].weather[0].description)
-
-        //     //Humidity: data.list[i].main.humidity
-        //     console.log(data.list[i].main.humidity)
-        // }
         for (let i = 3; i <= 36; i += 8 ) {
             generatedCols+= 
                 `<div class="col-2">
@@ -175,8 +149,29 @@ const returnFiveDayForecast = async (event) => {
 
 futureForecastButton.addEventListener('click', returnFiveDayForecast);
 
-submitButton.addEventListener('click', returnCurrentForecast);
-submitButton.addEventListener('click', returnFiveDayForecast)
+
+// const completeWeatherForecast = async (event) => {
+//     console.log("All promises function call test")
+//     let allPromises = await Promise.all([returnCurrentForecast(), returnFiveDayForecast()]);
+// }
+
+const completeWeatherForecast = async (event) => {
+    event.preventDefault();
+    console.log("Complete weather function firing")
+    let firstPromise = await returnCurrentForecast();
+    console.log(`The first promise returned is: ${firstPromise}`)
+    let secondPromise = await returnFiveDayForecast();
+    console.log(`The Second promise returned is ${secondPromise}`);
+}
+
+//THIS IS WORKING
+// submitButton.addEventListener('click', (event) => {
+//     event.preventDefault();
+//     console.log("Submit button test")
+// });
+
+submitButton.addEventListener('click', completeWeatherForecast)
+
 
 
 //Event listener for history

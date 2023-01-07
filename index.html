@@ -13,60 +13,65 @@
 
   <!-- Header -->
   <body>
-    <div class="container">
-      <div class="row">
+    <div class="container-fluid">
+      <div class="row title">
         <h1>Ked's Wicked Weather WApp</h1>
         <p>Go ahead, throw a city back and select the information you want to use!</p>
       </div>
       
-      <div class="row">
+    <div class="row main-section">
 
-        <div class="col">
-          <div class="row">
-            <form id="form">
-              <h2>Enter the city and country name</h2>
-              <p><em>Example: Caguas, Puerto Rico</em></p>
-                  <input type="text" id="input-bar"/>
-              <p><button id="submit">Today's Weather</button></p>
-              <p><button id="future-forecast-button">Future Forecast</button></p>
-            </form>
+      <div class="col-5">
+        <div class="row  input-column">
+          <form id="form">
+            <h2>Enter the city and country name</h2>
+            <p><em>Example: Caguas, Puerto Rico</em></p>
+                <input type="text" id="input-bar"/>
+            <p><button id="submit">Today's Weather</button></p>
+            <p><button id="future-forecast-button">Future Forecast</button></p>
+          </form>
+        </div>
+
+        <div class="row history">
+          <p>History</p>
+          <div class="col-12">
+
           </div>
-
-          <div class="row">
-
-          </div>
         </div>
-
-        <div class="col one-column current-weather">
-          <!-- Information for the current weather -->
-          <h2 id="todays-weather"></h2>
-          <!-- Display temperature here (data.main.temp) -->
-          <p><span id="display-temperature"></span></p>
-
-          <!-- Display high (data.main.temp_max) -->
-          <p><span id="display-daily-high"></span></p>
-
-          <!-- Display min (data.main.temp_min) -->
-          <p><span id="display-daily-low"></span></p>
-
-          <!-- Display Forecast here (data.weather.description) -->
-          <p><span id="display-skies"></span></p>
-
-          <!-- Display Humidity (data.main.humidity) -->
-          <p><span id="display-humidity"></span></p>
-        </div>
-
-        <div class="col future-information-section">
-          <div id="future-information">
-
-        </div>
-
-
-
-        </div>
-
-          
       </div>
+
+      <div class="col one-column current-weather">
+        <!-- Information for the current weather -->
+        <h2 id="todays-weather">Today's Weather:</h2>
+        <!-- Display temperature here (data.main.temp) -->
+        <p><span id="display-temperature"></span></p>
+
+        <!-- Display high (data.main.temp_max) -->
+        <p><span id="display-daily-high"></span></p>
+
+        <!-- Display min (data.main.temp_min) -->
+        <p><span id="display-daily-low"></span></p>
+
+        <!-- Display Forecast here (data.weather.description) -->
+        <p><span id="display-skies"></span></p>
+
+        <!-- Display Humidity (data.main.humidity) -->
+        <p><span id="display-humidity"></span></p>
+      </div>
+
+      <div class="col future-forecast">
+        <h1>Future Forecast:</h1>
+
+          <div class="row future-information-section">
+
+          </div>
+      </div>
+
+
+
+
+        
+    </div>
     </div>
 
 

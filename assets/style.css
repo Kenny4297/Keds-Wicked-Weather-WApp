@@ -17,12 +17,23 @@ body {
     outline: 2px solid orange;
 }
 
-.container {
-    outline: 2px solid purple;
+.title {
+    flex-direction: column;
+    text-align: center;
 }
 
+.history {
+
+}
+
+/* .container {
+    outline: 2px solid greenyellow;
+    width: 150%;
+    margin: 0 auto;
+} */
+
 .one-column {
-    margin: 10px auto;
+    /* margin: 10px auto; */
 }
 
 #history-dropdown {
@@ -36,9 +47,13 @@ body {
 }
 
 .future-information-section {
-    display: none;
     justify-content: space-evenly;
     color: green;
+}
+
+.main-section {
+    /* text-align: center; */
+    /* margin: 0 auto; */
 }
 
 .input-section {
@@ -48,10 +63,15 @@ body {
     color: black;
 }
 
+.input-row {
+    /* width: 100%; */
+    text-align: center;
+}
+
 .input-section-data {
     margin: 0 auto;
     outline: 2px solid purple;
-    width: 60%;
+    width: 100%;
     margin-top: 10px;
     margin-bottom: 20px;
     border-radius: 10px;
@@ -61,4 +81,15 @@ body {
 
 #form {
     display: block;
+    /* width: 150%; */
+    margin: 0 auto;
+}
+
+.history {
+    display: flex;
+    flex-direction: column;
+}
+
+.history p {
+    margin: 0 auto;
 }

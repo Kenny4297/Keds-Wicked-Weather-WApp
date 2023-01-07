@@ -23,40 +23,28 @@ const userInput = document.getElementById("input-bar");
 const futureForecastButton = document.getElementById("future-forecast-button");
 
 //Resting Home Page
-currentWeather.classList.add("hidden");
 futureInformationSection.classList.add("hidden");
+document.querySelector(".future-forecast").classList.add("hidden");
 
 let count = 0;
+
 let arrayOfHistoryItems = [];
 
-// const addToHistory = () => {
-//     const userPicksCity = document.getElementById("input-bar").value;
-//     // console.log(`User picks city: ${userPicksCity}`)
-
-//     let historyOption = document.createElement("option");
-//     // console.log(`HistoryOption: ${historyOption}`);
-
-//     historyOption.innerHTML = `<option id='${count}'>${userPicksCity}</option>`;
-//     // historyOption.innerHTML = `class='specific-history-item'>${userPicksCity}`;
-
-//     historyDropDown.appendChild(historyOption);
-//     arrayOfHistoryItems.push(historyOption);
-
-//     count++
-
-//     historyDropDown.addEventListener('click', (event) => {
-//         console.log("historyToInput event listener firing")
-//         let element = event.target;
-//         returnCurrentForecast(element);
-//     })
-// }   
-
-const historyToInput = (event) => {
-    //Get the value of the drop down bar and add an event listener to it
-
+let historyArrayOfButtons = [];
+const addToHistory = (userPicksCity) => {
+        console.log("addToHistory function firing")
+        console.log(`UserPicksCity is: ${userPicksCity}`)
+    if (!(historyArrayOfButtons.includes(userPicksCity))) {
+            console.log("If statement check")
+        historyArrayOfButtons.push(userPicksCity);
+        console.log(historyArrayOfButtons)
+        let historyButton = document.createElement("button");
+        historyButton.innerText = `${userPicksCity}`;
+        document.querySelector(".col-12").appendChild(historyButton);
+    }   
 }
 
-historyOption.addEventListener('click', historyToInput)
+
 
 //Get the current day's forecast
 const returnCurrentForecast = async (event) => {
@@ -64,41 +52,43 @@ const returnCurrentForecast = async (event) => {
 
     //Add or remove the type of section for the weather
     // futureInformationSection.classList.add("hidden");
+    document.querySelector(".future-forecast").classList.add("hidden");
     futureInformationSection.style.display = "none";
     currentWeather.classList.remove("hidden");
 
-    const userPicksCity = document.getElementById("input-bar").value;
+    let userPicksCity = document.getElementById("input-bar").value;
+
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${userPicksCity}&appid=${apiKey}&units=imperial`;
     // console.log("Event Listener firing!")
-    // console.log(userPicksCity);
+    console.log(userPicksCity);
     try {
         response = await fetch(url);
         data = await response.json();
-        console.log(data);
+        // console.log(data);
         //Display the title
         todaysWeather.innerText = "Todays Weather:"
 
         //Display the current temperature
         temperature.innerText = `Current Temperature (F): ${data.main.temp}`;
-        console.log(data.main.temp)
+        // console.log(data.main.temp)
 
         //Display the daily high
         dailyHigh.innerText = `High: ${data.main.temp_max}`
-        console.log(data.main.temp_max)
+        // console.log(data.main.temp_max)
 
         //Display the daily Low
         dailyLow.innerText = `Low: ${data.main.temp_min}`
-        console.log(data.main.temp_min)
+        // console.log(data.main.temp_min)
 
         //Display the skies
         skies.innerText = `Skies: ${data.weather[0].description}`
-        console.log(data.weather[0].description)
+        // console.log(data.weather[0].description)
 
         //Display Humidity
         humidity.innerText = `Humidity: ${data.main.humidity}%`
-        console.log(data.main.humidity)
+        // console.log(data.main.humidity)
 
-        // addToHistory();
+        addToHistory(userPicksCity);
     } catch (error) {
         console.log("This didn't work")
     }
@@ -115,9 +105,11 @@ const returnFiveDayForecast = async (event) => {
     event.preventDefault();
 
     //Add or remove today's forecast
+    // document.querySelector(".future-title").classList.remove("hidden");
     currentWeather.classList.add("hidden")
-    // futureInformationSection.classList.remove("hidden");
-    futureInformationSection.style.display = 'flex'
+    futureInformationSection.classList.remove("hidden");
+    futureInformationSection.style.display = 'flex';
+    document.querySelector(".future-forecast").classList.remove("hidden");
     console.log(currentWeather.style)
 
     const userPicksCity = document.getElementById("input-bar").value;
@@ -130,6 +122,7 @@ const returnFiveDayForecast = async (event) => {
         console.log(data);
         //Array 4 is noon for the next day, (+8 for each day noon data)
         // BELOW WORKS WITHOUT ADDING ANYTHING TO THE HTML
+
         let generatedCols = '';
         // for (let i = 4; i <= 36; i += 8 ) {
         //     //Date: data.list[#of 3hours intervals].dt_text
@@ -165,12 +158,18 @@ const returnFiveDayForecast = async (event) => {
 
             futureInformationSection.innerHTML = generatedCols;
             }
+        addToHistory();
         } catch (error) {
         console.log("Sorry this didn't work")
     }
 };
 
 futureForecastButton.addEventListener('click', returnFiveDayForecast);
+
+//Event listener for history
+// historyArrayOfButtons.forEach(button => {
+//     button.addEventListener('click', () =>)
+// })
 
 
 

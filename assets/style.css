@@ -93,3 +93,8 @@ body {
 .history p {
     margin: 0 auto;
 }
+
+.row-weather {
+    display: flex;
+    flex-direction: column;
+}

@@ -40,31 +40,44 @@
         </div>
       </div>
 
-      <div class="col one-column current-weather">
+      <div class="col current-weather">
         <!-- Information for the current weather -->
-        <h2 id="todays-weather">Today's Weather:</h2>
-        <!-- Display temperature here (data.main.temp) -->
-        <p><span id="display-temperature"></span></p>
 
-        <!-- Display high (data.main.temp_max) -->
-        <p><span id="display-daily-high"></span></p>
+          <div class="row row-weather">
+            <h2 id="todays-weather">Today's Weather:</h2>
+              <div class="col todays-weather-specs">
+                <!-- Display temperature here (data.main.temp) -->
+                <!-- <p><span id="display-temperature"></span></p> -->
 
-        <!-- Display min (data.main.temp_min) -->
-        <p><span id="display-daily-low"></span></p>
+                <!-- Display high (data.main.temp_max) -->
+                <!-- <p><span id="display-daily-high"></span></p> -->
 
-        <!-- Display Forecast here (data.weather.description) -->
-        <p><span id="display-skies"></span></p>
+                <!-- Display min (data.main.temp_min) -->
+                <!-- <p><span id="display-daily-low"></span></p> -->
 
-        <!-- Display Humidity (data.main.humidity) -->
-        <p><span id="display-humidity"></span></p>
+                <!-- Display Forecast here (data.weather.description) -->
+                <!-- <p><span id="display-skies"></span></p> -->
+
+                <!-- Display Humidity (data.main.humidity) -->
+                <!-- <p><span id="display-humidity"></span></p> -->
+              </div>
+          </div>
+
+          <div class="row row-weather">
+            <h1>Future Forecast:</h1>
+              <div class="col">
+                <div class="row future-information-section"></div>
+            </div>
+          </div>
+
+
+
+
+        
       </div>
 
       <div class="col future-forecast">
-        <h1>Future Forecast:</h1>
-
-          <div class="row future-information-section">
-
-          </div>
+        
       </div>
 
 

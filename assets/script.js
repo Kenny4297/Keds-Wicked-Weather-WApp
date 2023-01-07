@@ -23,7 +23,7 @@ const userInput = document.getElementById("input-bar");
 const futureForecastButton = document.getElementById("future-forecast-button");
 
 //Resting Home Page
-futureInformationSection.classList.add("hidden");
+// futureInformationSection.classList.add("hidden");
 document.querySelector(".future-forecast").classList.add("hidden");
 
 let count = 0;
@@ -65,28 +65,45 @@ const returnCurrentForecast = async (event) => {
         response = await fetch(url);
         data = await response.json();
         // console.log(data);
-        //Display the title
-        todaysWeather.innerText = "Todays Weather:"
 
-        //Display the current temperature
-        temperature.innerText = `Current Temperature (F): ${data.main.temp}`;
-        // console.log(data.main.temp)
+        //!Old way from HTML
+        //! temperature.innerText = `Current Temperature (F): ${data.main.temp}`;
+        //! console.log(data.main.temp)
+        //?Display the current temperature from JS
+        let displayTemperature = document.createElement("p");
+        // displayTemperature.setAttribute("id", "display-temperature");
+        displayTemperature.innerText = `Current Temperature (F): ${data.main.temp}`;
+        document.querySelector(".todays-weather-specs").appendChild(displayTemperature);
 
-        //Display the daily high
-        dailyHigh.innerText = `High: ${data.main.temp_max}`
-        // console.log(data.main.temp_max)
+        //!Display the daily high
+        //!dailyHigh.innerText = `High: ${data.main.temp_max}`
+        //! console.log(data.main.temp_max)
+        //? Display the daily high in JS
+        let displayDailyHigh = document.createElement("p");
+        displayDailyHigh.innerText = `High: ${data.main.temp_max}`;
+        document.querySelector(".todays-weather-specs").appendChild(displayDailyHigh);
 
-        //Display the daily Low
-        dailyLow.innerText = `Low: ${data.main.temp_min}`
-        // console.log(data.main.temp_min)
+        //! Display the daily Low
+        //! dailyLow.innerText = `Low: ${data.main.temp_min}`
+        //! console.log(data.main.temp_min)
+        //? Display the daily low
+        let displayDailyLow = document.createElement("p");
+        displayDailyLow.innerText = `Low: ${data.main.temp_min}`;
+        document.querySelector(".todays-weather-specs").appendChild(displayDailyLow);
 
-        //Display the skies
-        skies.innerText = `Skies: ${data.weather[0].description}`
-        // console.log(data.weather[0].description)
+        //!Display the skies
+        //!skies.innerText = `Skies: ${data.weather[0].description}`
+        //!console.log(data.weather[0].description)
+        let displaySkies = document.createElement("p");
+        displaySkies.innerText = `Skies: ${data.weather[0].description}`;
+        document.querySelector(".todays-weather-specs").appendChild(displaySkies);
 
-        //Display Humidity
-        humidity.innerText = `Humidity: ${data.main.humidity}%`
-        // console.log(data.main.humidity)
+        //!Display Humidity
+        //!humidity.innerText = `Humidity: ${data.main.humidity}%`
+        //!console.log(data.main.humidity)
+        let displayHumidity = document.createElement("p");
+        displayHumidity.innerText = `Humidity: ${data.main.humidity}%`;
+        document.querySelector(".todays-weather-specs").appendChild(displayHumidity);
 
         addToHistory(userPicksCity);
     } catch (error) {
@@ -106,11 +123,10 @@ const returnFiveDayForecast = async (event) => {
 
     //Add or remove today's forecast
     // document.querySelector(".future-title").classList.remove("hidden");
-    currentWeather.classList.add("hidden")
-    futureInformationSection.classList.remove("hidden");
-    futureInformationSection.style.display = 'flex';
-    document.querySelector(".future-forecast").classList.remove("hidden");
-    console.log(currentWeather.style)
+    // currentWeather.classList.add("hidden")
+    // futureInformationSection.classList.remove("hidden");
+    // futureInformationSection.style.display = 'flex';
+    // document.querySelector(".future-forecast").classList.remove("hidden");
 
     const userPicksCity = document.getElementById("input-bar").value;
     console.log(userPicksCity);

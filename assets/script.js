@@ -111,7 +111,6 @@ const returnCurrentForecast = async (event) => {
     }
 };
 
-submitButton.addEventListener('click', returnCurrentForecast);
 
 
 
@@ -120,14 +119,7 @@ submitButton.addEventListener('click', returnCurrentForecast);
 const returnFiveDayForecast = async (event) => {
     console.log("firing")
     event.preventDefault();
-
-    //Add or remove today's forecast
-    // document.querySelector(".future-title").classList.remove("hidden");
-    // currentWeather.classList.add("hidden")
-    // futureInformationSection.classList.remove("hidden");
-    // futureInformationSection.style.display = 'flex';
-    // document.querySelector(".future-forecast").classList.remove("hidden");
-
+    
     const userPicksCity = document.getElementById("input-bar").value;
     console.log(userPicksCity);
     const url = `https://api.openweathermap.org/data/2.5/forecast?q=${userPicksCity}&appid=${apiKey}&units=imperial`;
@@ -181,6 +173,10 @@ const returnFiveDayForecast = async (event) => {
 };
 
 futureForecastButton.addEventListener('click', returnFiveDayForecast);
+
+submitButton.addEventListener('click', returnCurrentForecast);
+submitButton.addEventListener('click', returnFiveDayForecast)
+
 
 //Event listener for history
 // historyArrayOfButtons.forEach(button => {

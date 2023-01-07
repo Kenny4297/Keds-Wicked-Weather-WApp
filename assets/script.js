@@ -31,18 +31,19 @@ let count = 0;
 let arrayOfHistoryItems = [];
 
 let historyArrayOfButtons = [];
-const addToHistory = (userPicksCity) => {
-        console.log("addToHistory function firing")
-        console.log(`UserPicksCity is: ${userPicksCity}`)
-    if (!(historyArrayOfButtons.includes(userPicksCity))) {
-            console.log("If statement check")
-        historyArrayOfButtons.push(userPicksCity);
-        console.log(historyArrayOfButtons)
-        let historyButton = document.createElement("button");
-        historyButton.innerText = `${userPicksCity}`;
-        document.querySelector(".col-12").appendChild(historyButton);
-    }   
-}
+
+// const addToHistory = (userPicksCity) => {
+//         console.log("addToHistory function firing")
+//         console.log(`UserPicksCity is: ${userPicksCity}`)
+//     if (!(historyArrayOfButtons.includes(userPicksCity))) {
+//             console.log("If statement check")
+//         historyArrayOfButtons.push(userPicksCity);
+//         console.log(historyArrayOfButtons)
+//         let historyButton = document.createElement("button");
+//         historyButton.innerText = `${userPicksCity}`;
+//         document.querySelector(".col-12").appendChild(historyButton);
+//     }   
+// }
 
 
 
@@ -105,7 +106,7 @@ const returnCurrentForecast = async (event) => {
         displayHumidity.innerText = `Humidity: ${data.main.humidity}%`;
         document.querySelector(".todays-weather-specs").appendChild(displayHumidity);
 
-        addToHistory(userPicksCity);
+        // addToHistory(userPicksCity);
     } catch (error) {
         console.log("This didn't work")
     }
@@ -166,7 +167,7 @@ const returnFiveDayForecast = async (event) => {
 
             futureInformationSection.innerHTML = generatedCols;
             }
-        addToHistory();
+        // addToHistory();
         } catch (error) {
         console.log("Sorry this didn't work")
     }

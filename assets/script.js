@@ -36,35 +36,42 @@ let count = 0;
 
 let historyArrayOfButtons = [];
 
-const addToHistory = (userPicksCity) => {
-    console.log("add to history function firing")
-    console.log(historyArrayOfButtons);
-    //This is wrong. The city comes in as the city name. Here we are checking to see if the city name has come it, and still adding the same button with a different ID???
-        console.log("if statement firing for line 44")
-        let button = document.createElement("button");
-        button.setAttribute("id", `${userPicksCity.split(' ').join("-")}`);
-        button.innerText = `${userPicksCity}`;
-        historyArrayOfButtons.push(button);
-            console.log(`History array of buttons: ${historyArrayOfButtons}`);
-        if (!(historyArrayOfButtons.includes(button.innerText))) {
-            console.log(historyArrayOfButtons.includes(button.innerText))
-            console.log("Second if statement firing")
-            document.querySelector(".col-12").appendChild(button);
-            console.log(`The 'historyArrayOfButton':${historyArrayOfButtons}`)
-    } else {
-        console.log("Else statement")
-        console.log(historyArrayOfButtons.includes(button.innerText))
-    }
+const addToHistory = (event) => {
+    // event.preventDefault();
+    let userPicksCity = document.getElementById("input-bar").value;
+ 
+    if (!(historyArrayOfButtons.includes(userPicksCity))) {
+        //Adding the city to the array of buttons so the history buttons do not keep repeating the same city
+        historyArrayOfButtons.push(userPicksCity);
 
-    historyArrayOfButtons.forEach((button) => {
-        button.addEventListener('click', (event) => {
-                console.log(button.innerText);
-            completeWeatherForecast(event);
+
+        //Creating a new button
+        let cityHistoryButton = document.createElement("button");
+            // console.log(cityHistoryButton);
+
+
+        //Setting the class to that specific button
+        cityHistoryButton.setAttribute("class", "history-item");
+            console.log(cityHistoryButton);
+
+
+        //Adding the button text
+        cityHistoryButton.innerText = `${userPicksCity}`;
+            console.log(cityHistoryButton);
+
+
+        // cityHistoryButton.innerHTML = `<button class="history-item">${userPicksCity}</button>`;
+        //     console.log(cityHistoryButton);
+        document.querySelector(".history").append(cityHistoryButton);
+
+        cityHistoryButton.addEventListener('click', (event) => {
+            let testVariable = cityHistoryButton.innerText;
+            console.log(`The test variable is: ${testVariable}`)
+            console.log("History event listener firing");
+            completeWeatherForecast(testVariable);
         })
-    })
-    
+    }
 }
-
 
 
 
@@ -101,30 +108,11 @@ const returnCurrentForecast = async (event) => {
     try {
         response = await fetch(url);
         data = await response.json();
-        // console.log(data);
-
-        // city name 
-        //&  data.name
-
-        // the date 
-        //& dayjs().$d.substring(0, 6) ((May have to adjust second argument number))
-
-        // an icon representation of weather conditions 
-        //& self-explanatory
-
-        // the temperature 
-        //& data.main.temp
-
-        // the humidity 
-        //& data.main.humidity
-
-        //wind speed
-        //& data.wind[0]
-
+        console.log(data);
 
         //Display city name
         cityName.innerText = `${data.name}`;
-        // console.log(data.name)
+        console.log(data.name)
 
         //Display the date
         displayDate.innerText = `${dayjs().$d.toString().substring(0, 10)}`;
@@ -192,16 +180,19 @@ const returnFiveDayForecast = async (event) => {
 
 const completeWeatherForecast = async (event) => {
     event.preventDefault();
-    // console.log("Complete weather function firing")
+    console.log("Complete weather function firing")
     let firstPromise = await returnCurrentForecast();
     // console.log(`The first promise returned is: ${firstPromise}`)
     let secondPromise = await returnFiveDayForecast();
     let userPicksCity = document.getElementById("input-bar").value;
-    addToHistory(userPicksCity);
+    addToHistory();
     // console.log(`User Picks City: ${userPicksCity}`)
 }
 
 submitButton.addEventListener('click', completeWeatherForecast);
+
+
+
 
 
 

@@ -73,8 +73,6 @@ const addToHistory = (event) => {
     }
 }
 
-
-
 //==========GETTING THE HISTORY BUTTONS TO LISTEN FOR CLICK=================
 //FOR EACH METHOD TO LOOP THROUGH THE HISTORY BUTTONS
 // Array.from(historyArrayOfButtons).forEach(button => {
@@ -89,9 +87,6 @@ const addToHistory = (event) => {
 // for (let i = 0; i < historyArrayOfButtons.length; i++) {
 //     console.log(historyArrayOfButtons[i]);
 // }
-
-
-
 
 //===============================================================================
 

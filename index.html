@@ -13,14 +13,16 @@
 
   <!-- Header -->
   <body>
-    <div class="container-fluid">
-      <div class="row title">
-        <h1>Ked's Wicked Weather WApp</h1>
-        <p>Go ahead, throw a city back and select the information you want to use!</p>
+    <header class=".text-center">
+      <!-- <div class="container mt-5 mb-3"> -->
+        <div class="row mt-5 mb-3 w-50 mx-auto title">
+          <h1>Ked's Wicked Weather WApp</h1>
+          <p>Go ahead, throw a city back and select the information you want to use!</p>
+        <!-- </div> -->
       </div>
+    </header>
       
-    <div class="row main-section">
-
+    <div class="row main-section mt-3">
       <div class="col-5">
         <div class="row  input-column">
           <form id="form">
@@ -31,8 +33,8 @@
           </form>
         </div>
 
-        <div class="row">
-          <p>History</p>
+        <div class="row history-row">
+          <p>Recent History</p>
           <div class="col-12 history">
 
           </div>
@@ -49,15 +51,14 @@
                 <!-- Display city name -->
                 <p><strong><span id="display-city-name"></strong></span></p>
 
-
                 <!-- Display Date -->
                 <p><span id="display-date"></span></p>
 
 
                 <!-- Display weather icon -->
-                <!-- <p><span id="weather-icon"></span></p> -->
+                <p><span id="weather-icon"></span></p>
                 <!-- Display Forecast here (data.weather.description) -->
-                <!-- <p><span id="display-skies"></span></p> -->
+                <p><span id="display-skies"></span></p>
 
 
                 <!-- Display temperature here (data.main.temp) -->
@@ -85,15 +86,7 @@
           </div>
       </div>
 
-      <div class="col future-forecast">
-        
-      </div>
-
-
-
-
-        
-    </div>
+      <div class="col future-forecast"></div>    
     </div>
 
 

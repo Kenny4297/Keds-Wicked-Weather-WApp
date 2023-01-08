@@ -6,23 +6,22 @@ const todaysWeather = document.getElementById("todays-weather");
 const cityName = document.getElementById("display-city-name");
 const displayDate = document.getElementById("display-date");
 const temperature = document.getElementById("display-temperature");
-const weatherIcon = document.getElementById("weather-icon")
+const weatherIcon = document.getElementById("weather-icon");
+
 const dailyHigh = document.getElementById("display-daily-high");
 const dailyLow = document.getElementById("display-daily-low");
-const skies = document.getElementById("display-skies")
+const skies = document.getElementById("display-skies");
 const humidity = document.getElementById("display-humidity");
 const futureInformation = document.getElementById("future-information");
 const currentWeather = document.querySelector(".current-weather");
 const futureInformationSection = document.querySelector(".future-information-section");
 const windSpeed = document.getElementById("wind-speed");
-// const historyDropDown = document.getElementById("history-dropdown");
 const historyDropDown = document.getElementById("history");
 let historyOption = document.createElement("option");
 const userInput = document.getElementById("input-bar");
+const historyRow = document.querySelector(".history-row");
 
 let userPicksCity = document.getElementById("input-bar").value;
-
-
 //Buttons
 const submitButton = document.getElementById("submit");
 
@@ -32,12 +31,16 @@ document.querySelector(".future-forecast").classList.add("hidden");
 
 let count = 0;
 
+currentWeather.classList.add('hidden');
+historyRow.classList.add('hidden');
+
 // let arrayOfHistoryItems = [];
 
 let historyArrayOfButtons = [];
 
 const addToHistory = (event) => {
     // event.preventDefault();
+
     let userPicksCity = document.getElementById("input-bar").value;
  
     if (!(historyArrayOfButtons.includes(userPicksCity))) {
@@ -89,7 +92,7 @@ const returnCurrentForecast = async (city) => {
     try {
         response = await fetch(url);
         data = await response.json();
-        console.log(data);
+        // console.log(data);
 
         //Display city name
         cityName.innerText = `${data.name}`;
@@ -100,9 +103,12 @@ const returnCurrentForecast = async (city) => {
         // console.log(dayjs().$d.toString().substring(0, 6))
 
         //Display Weather icon here
+        weatherIcon.innerHTML = `<img src='http://openweathermap.org/img/w/${data.weather[0].icon}.png'>`
+        //Display skies here
+        skies.innerHTML = `${data.weather[0].description}`
 
         //Display temperature
-        temperature.innerText = `Current Temperature (F): ${data.main.temp}`;
+        temperature.innerHTML = `Current Temperature: ${data.main.temp}&deg;F`;
         // console.log(data.main.temp)
 
         //Display humidity
@@ -135,13 +141,14 @@ const returnFiveDayForecast = async (city) => {
         //Array 4 is noon for the next day, (+8 for each day noon data)
         // BELOW WORKS WITHOUT ADDING ANYTHING TO THE HTML
 
-        // console.log(data);
+        console.log(data);
         let generatedCols = '';
         for (let i = 3; i <= 36; i += 8 ) {
             generatedCols+= 
-                `<div class="col-sm-4">
-                        <p>Date: ${data.list[i].dt_txt.substring(0, 10)}</p>
-                        <p>Temperature: ${data.list[i].main.temp}</p>
+                `<div class="col-sm-4 future-forecast-css">
+                        <p><u>Date: ${data.list[i].dt_txt.substring(0, 10)}</u></p>
+                        <p>Temperature: ${data.list[i].main.temp}&deg;F</p>
+                        <img src='http://openweathermap.org/img/w/${data.list[i].weather[0].icon}.png'>
                         <p>Skies: ${data.list[i].weather[0].description}</p>
                         <p>Humidity: ${data.list[i].main.humidity}</p>
                     </div>
@@ -160,6 +167,11 @@ const returnFiveDayForecast = async (city) => {
 
 const completeWeatherForecast = async (userPicksCity) => {
     // event.preventDefault();
+    currentWeather.classList.remove('hidden');
+
+    historyRow.classList.remove('hidden');
+
+
     console.log("Complete weather function firing")
     let firstPromise = await returnCurrentForecast(userPicksCity);
     // console.log(`The first promise returned is: ${firstPromise}`)
@@ -168,8 +180,6 @@ const completeWeatherForecast = async (userPicksCity) => {
     addToHistory();
     // console.log(`User Picks City: ${userPicksCity}`)
 }
-
-//& I need two event listeners: one for the input value, the other for the click value
 
 //Regular button
 submitButton.addEventListener('click', (event) => {

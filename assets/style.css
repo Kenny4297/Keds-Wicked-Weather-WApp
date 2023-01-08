@@ -1,20 +1,26 @@
 * {
     box-sizing: border-box;
-    margin: 10px;
+    /* background-color: aqua; */
 }
 
 .row, [class*="row-"] {
-    border: 2px solid red;
+    outline: 2px solid red;
 }
 
 /* This selects all the columns in Bootstrap for better display */
 .col, [class*="col-"] {
-    border: 2px solid blue;
+    text-align: center;
+    outline: 2px solid blue;
+}
+
+header {
+    display: flex;
     text-align: center;
 }
 
 body {
-    outline: 2px solid orange;
+    /* outline: 2px solid orange; */
+    /* display: flex; */
 }
 
 .title {
@@ -22,25 +28,22 @@ body {
     text-align: center;
 }
 
-.history {
-
+.title p {
+    border-bottom: 2px solid green;
 }
 
-/* .container {
-    outline: 2px solid greenyellow;
-    width: 150%;
+.history-row {
+    text-align: center;
+    /* margin: 0 auto; */
+    justify-content: center;
+}
+
+.history-item {
+    width: 40%;
     margin: 0 auto;
-} */
-
-.one-column {
-    /* margin: 10px auto; */
+    margin: 10px auto;
 }
 
-#history-dropdown {
-    width: 80%;
-    outline: 2px solid blue;
-    color: aqua;
-}
 
 .hidden {
     display: none;
@@ -52,8 +55,7 @@ body {
 }
 
 .main-section {
-    /* text-align: center; */
-    /* margin: 0 auto; */
+    justify-content: center;
 }
 
 .input-section {
@@ -68,7 +70,7 @@ body {
     text-align: center;
 }
 
-.input-section-data {
+/* .input-section-data {
     margin: 0 auto;
     outline: 2px solid purple;
     width: 100%;
@@ -77,7 +79,7 @@ body {
     border-radius: 10px;
     background-color: aliceblue;
     opacity: .9;
-}
+} */
 
 #form {
     display: block;
@@ -94,7 +96,17 @@ body {
     margin: 0 auto;
 }
 
+.history-row {
+
+}
+
 .row-weather {
     display: flex;
     flex-direction: column;
+}
+
+.future-forecast-css {
+    background: pink;
+    border-radius: 20px;
+    padding-left: -100px;
 }

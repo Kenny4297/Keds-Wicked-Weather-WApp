@@ -131,10 +131,6 @@ const returnCurrentForecast = async (event) => {
         windSpeed.innerText = `Wind Speed: ${data.wind.speed}mph`;
         console.log(data.wind.speed)
 
-
-
-
-
         // addToHistory(userPicksCity);
     } catch (error) {
         console.log("This didn't work")

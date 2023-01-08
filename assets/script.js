@@ -32,47 +32,61 @@ document.querySelector(".future-forecast").classList.add("hidden");
 
 let count = 0;
 
-let arrayOfHistoryItems = [];
+// let arrayOfHistoryItems = [];
 
-let historyArrayOfButtons = Array.from([]);
-
-
-//! Old way in case I mess things up
-// const addToHistory = (userPicksCity) => {
-//                 console.log("addToHistory function firing")
-//                 console.log(`UserPicksCity is: ${userPicksCity}`)
-//     if (!(historyArrayOfButtons.includes(userPicksCity))) {
-//                 console.log("If statement check")
-//                 console.log(historyArrayOfButtons)
-//         let historyButton = document.createElement("button");
-//         historyButton.setAttribute("id", `${userPicksCity.split(' ').join("-")}`);
-//         historyArrayOfButtons.push(historyButton);
-//                 console.log(historyButton);
-//                 // console.log(`the History Array of Buttons are: ${historyArrayOfButtons}`);
-//         historyButton.innerText = `${userPicksCity}`;
-//         document.querySelector(".col-12").appendChild(historyButton);
-//     }
-// }
+let historyArrayOfButtons = [];
 
 const addToHistory = (userPicksCity) => {
-            console.log("add to history function firing")
-    if (!(historyArrayOfButtons.includes(userPicksCity))) {
+    console.log("add to history function firing")
+    console.log(historyArrayOfButtons);
+    //This is wrong. The city comes in as the city name. Here we are checking to see if the city name has come it, and still adding the same button with a different ID???
+        console.log("if statement firing for line 44")
         let button = document.createElement("button");
         button.setAttribute("id", `${userPicksCity.split(' ').join("-")}`);
         button.innerText = `${userPicksCity}`;
         historyArrayOfButtons.push(button);
-                console.log(`History array of buttons: ${historyArrayOfButtons}`);
-        document.querySelector(".col-12").appendChild(button);
+            console.log(`History array of buttons: ${historyArrayOfButtons}`);
+        if (!(historyArrayOfButtons.includes(button.innerText))) {
+            console.log(historyArrayOfButtons.includes(button.innerText))
+            console.log("Second if statement firing")
+            document.querySelector(".col-12").appendChild(button);
+            console.log(`The 'historyArrayOfButton':${historyArrayOfButtons}`)
+    } else {
+        console.log("Else statement")
+        console.log(historyArrayOfButtons.includes(button.innerText))
     }
+
+    historyArrayOfButtons.forEach((button) => {
+        button.addEventListener('click', (event) => {
+                console.log(button.innerText);
+            completeWeatherForecast(event);
+        })
+    })
+    
 }
 
-Array.from(historyArrayOfButtons).forEach(button => {
-    console.log("Event listener for history buttons firing")
-    button.addEventListener('click', (event) => {
-        let buttonName = event.target.id;
-        completeWeatherForecast(buttonName);
-    })
-})
+
+
+
+//==========GETTING THE HISTORY BUTTONS TO LISTEN FOR CLICK=================
+//FOR EACH METHOD TO LOOP THROUGH THE HISTORY BUTTONS
+// Array.from(historyArrayOfButtons).forEach(button => {
+//     console.log("Event listener for history buttons firing")
+//     button.addEventListener('click', (event) => {
+//         let buttonName = event.target.id;
+//         completeWeatherForecast(buttonName);
+//     })
+// })
+
+//FOR LOOP VERSION
+// for (let i = 0; i < historyArrayOfButtons.length; i++) {
+//     console.log(historyArrayOfButtons[i]);
+// }
+
+
+
+
+//===============================================================================
 
 //Get the current day's forecast
 const returnCurrentForecast = async (event) => {
@@ -87,7 +101,7 @@ const returnCurrentForecast = async (event) => {
     try {
         response = await fetch(url);
         data = await response.json();
-        console.log(data);
+        // console.log(data);
 
         // city name 
         //&  data.name
@@ -110,26 +124,26 @@ const returnCurrentForecast = async (event) => {
 
         //Display city name
         cityName.innerText = `${data.name}`;
-        console.log(data.name)
+        // console.log(data.name)
 
         //Display the date
         displayDate.innerText = `${dayjs().$d.toString().substring(0, 10)}`;
-        console.log(dayjs().$d.toString().substring(0, 6))
+        // console.log(dayjs().$d.toString().substring(0, 6))
 
         //Display Weather icon here
 
         //Display temperature
         temperature.innerText = `Current Temperature (F): ${data.main.temp}`;
-        console.log(data.main.temp)
+        // console.log(data.main.temp)
 
         //Display humidity
         humidity.innerText = `Humidity: ${data.main.humidity}%`;
-        console.log(data.main.humidity)
+        // console.log(data.main.humidity)
 
 
         //Display Wind Speed
         windSpeed.innerText = `Wind Speed: ${data.wind.speed}mph`;
-        console.log(data.wind.speed)
+        // console.log(data.wind.speed)
 
         // addToHistory(userPicksCity);
     } catch (error) {
@@ -188,6 +202,7 @@ const completeWeatherForecast = async (event) => {
 }
 
 submitButton.addEventListener('click', completeWeatherForecast);
+
 
 
 

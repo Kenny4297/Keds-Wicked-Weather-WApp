@@ -20,7 +20,7 @@ const historyDropDown = document.getElementById("history");
 let historyOption = document.createElement("option");
 const userInput = document.getElementById("input-bar");
 
-// let userPicksCity = "test test";
+let userPicksCity = document.getElementById("input-bar").value;
 
 
 //Buttons
@@ -64,40 +64,26 @@ const addToHistory = (event) => {
         //     console.log(cityHistoryButton);
         document.querySelector(".history").append(cityHistoryButton);
 
+        //Submit button for city history
         cityHistoryButton.addEventListener('click', (event) => {
-            let testVariable = cityHistoryButton.innerText;
-            console.log(`The test variable is: ${testVariable}`)
-            console.log("History event listener firing");
-            completeWeatherForecast(testVariable);
+            event.preventDefault();
+            console.log(`city history button: ${cityHistoryButton.innerText}`)
+            completeWeatherForecast(cityHistoryButton.innerText);
         })
     }
 }
 
-//==========GETTING THE HISTORY BUTTONS TO LISTEN FOR CLICK=================
-//FOR EACH METHOD TO LOOP THROUGH THE HISTORY BUTTONS
-// Array.from(historyArrayOfButtons).forEach(button => {
-//     console.log("Event listener for history buttons firing")
-//     button.addEventListener('click', (event) => {
-//         let buttonName = event.target.id;
-//         completeWeatherForecast(buttonName);
-//     })
-// })
-
-//FOR LOOP VERSION
-// for (let i = 0; i < historyArrayOfButtons.length; i++) {
-//     console.log(historyArrayOfButtons[i]);
-// }
 
 //===============================================================================
 
 //Get the current day's forecast
-const returnCurrentForecast = async (event) => {
+const returnCurrentForecast = async (city) => {
     // event.preventDefault();
 
-    let userPicksCity = document.getElementById("input-bar").value;
+    // let city = document.getElementById("input-bar").value;
     // console.log(`User picks city line 61 test: ${userPicksCity}`);
 
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=${userPicksCity}&appid=${apiKey}&units=imperial`;
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=imperial`;
     // console.log("Today's Weather Event Listener firing!")
     // console.log(userPicksCity);
     try {
@@ -135,13 +121,13 @@ const returnCurrentForecast = async (event) => {
 };
 
 // Get the next five Days Forecast
-const returnFiveDayForecast = async (event) => {
+const returnFiveDayForecast = async (city) => {
     // console.log("firing")
     // event.preventDefault();
     
     let userPicksCity = document.getElementById("input-bar").value;
     // console.log(userPicksCity);
-    const url = `https://api.openweathermap.org/data/2.5/forecast?q=${userPicksCity}&appid=${apiKey}&units=imperial`;
+    const url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=imperial`;
     // console.log(`future forecast event listener firing`)
     try {
         response = await fetch(url);
@@ -172,19 +158,32 @@ const returnFiveDayForecast = async (event) => {
 
 // futureForecastButton.addEventListener('click', returnFiveDayForecast);
 
-
-const completeWeatherForecast = async (event) => {
-    event.preventDefault();
+const completeWeatherForecast = async (userPicksCity) => {
+    // event.preventDefault();
     console.log("Complete weather function firing")
-    let firstPromise = await returnCurrentForecast();
+    let firstPromise = await returnCurrentForecast(userPicksCity);
     // console.log(`The first promise returned is: ${firstPromise}`)
-    let secondPromise = await returnFiveDayForecast();
-    let userPicksCity = document.getElementById("input-bar").value;
+    let secondPromise = await returnFiveDayForecast(userPicksCity);
+    // let userPicksCity = document.getElementById("input-bar").value;
     addToHistory();
     // console.log(`User Picks City: ${userPicksCity}`)
 }
 
-submitButton.addEventListener('click', completeWeatherForecast);
+//& I need two event listeners: one for the input value, the other for the click value
+
+//Regular button
+submitButton.addEventListener('click', (event) => {
+    event.preventDefault();
+
+    let userPicksCity = document.getElementById("input-bar").value;
+
+    completeWeatherForecast(userPicksCity)
+});
+
+
+
+
+    
 
 
 

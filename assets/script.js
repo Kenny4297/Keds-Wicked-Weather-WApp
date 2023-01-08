@@ -145,14 +145,26 @@ const returnFiveDayForecast = async (city) => {
         let generatedCols = '';
         for (let i = 3; i <= 36; i += 8 ) {
             generatedCols+= 
-                `<div class="col-sm-4 future-forecast-css">
-                        <p><u>Date: ${data.list[i].dt_txt.substring(0, 10)}</u></p>
-                        <p>Temperature: ${data.list[i].main.temp}&deg;F</p>
-                        <img src='http://openweathermap.org/img/w/${data.list[i].weather[0].icon}.png'>
-                        <p>Skies: ${data.list[i].weather[0].description}</p>
-                        <p>Humidity: ${data.list[i].main.humidity}</p>
-                    </div>
-                `;
+            `<div class="card col-sm-2 mx-1 my-1 future-forecast-css" style="width: 18rem;">
+                <p><u>Date: ${data.list[i].dt_txt.substring(0, 10)}</u></p>
+                <p>Temperature: ${data.list[i].main.temp}&deg;F</p>
+                <img class="icon-images" src='http://openweathermap.org/img/w/${data.list[i].weather[0].icon}.png'>
+                <p>Skies: ${data.list[i].weather[0].description}</p>
+                <p>Humidity: ${data.list[i].main.humidity}</p>
+            </div>
+            `;
+
+
+
+
+                // `<div class="col-sm-4 future-forecast-css">
+                //         <p><u>Date: ${data.list[i].dt_txt.substring(0, 10)}</u></p>
+                //         <p>Temperature: ${data.list[i].main.temp}&deg;F</p>
+                //         <img src='http://openweathermap.org/img/w/${data.list[i].weather[0].icon}.png'>
+                //         <p>Skies: ${data.list[i].weather[0].description}</p>
+                //         <p>Humidity: ${data.list[i].main.humidity}</p>
+                //     </div>
+                // `;
             // console.log(generatedCols);
 
             futureInformationSection.innerHTML = generatedCols;

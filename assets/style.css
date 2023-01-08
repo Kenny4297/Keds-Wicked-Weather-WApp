@@ -1,6 +1,8 @@
 * {
     box-sizing: border-box;
     /* background-color: aqua; */
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .row, [class*="row-"] {
@@ -18,9 +20,18 @@ header {
     text-align: center;
 }
 
+.todays-weather-specs {
+    line-height: .8;
+}
+
+.current-weather {
+    background-color: rgb(236, 236, 178);
+}
+
 body {
     /* outline: 2px solid orange; */
     /* display: flex; */
+    background-color: rgb(250, 238, 240);
 }
 
 .title {
@@ -36,50 +47,53 @@ body {
     text-align: center;
     /* margin: 0 auto; */
     justify-content: center;
+    background-color: rgb(227, 236, 227);
+
+}
+
+.history-column {
 }
 
 .history-item {
-    width: 40%;
+    width: 60%;
     margin: 0 auto;
     margin: 10px auto;
 }
 
+.icon-images {
+    width: 80px;
+    /* text-align: center; */
+    margin: 0 auto;
+}
 
 .hidden {
     display: none;
 }
 
+
+
 .future-information-section {
-    justify-content: space-evenly;
+    /* justify-content: space-evenly; */
     color: green;
+    display: inline-block;
+}
+
+#display-city-name {
+    font-size: 30px;
+    text-decoration: underline;
 }
 
 .main-section {
     justify-content: center;
 }
 
-.input-section {
-    background-image: url(./images/Nature-Backgrounds.jpg);
-    background-size: cover;
-    background-position: center;
-    color: black;
+.input-column {
+    background-color: rgb(207, 207, 241);
 }
-
 .input-row {
     /* width: 100%; */
     text-align: center;
 }
-
-/* .input-section-data {
-    margin: 0 auto;
-    outline: 2px solid purple;
-    width: 100%;
-    margin-top: 10px;
-    margin-bottom: 20px;
-    border-radius: 10px;
-    background-color: aliceblue;
-    opacity: .9;
-} */
 
 #form {
     display: block;
@@ -106,6 +120,7 @@ body {
 }
 
 .future-forecast-css {
+    display: inline-block;
     background: pink;
     border-radius: 20px;
     padding-left: -100px;

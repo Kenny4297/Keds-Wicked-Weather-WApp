@@ -2,16 +2,19 @@ const apiKey = '0c8087e93b7bd6b5e9d6fbd5daee1b51';
 
 //DOM variables
 const body = document.getElementsByTagName("body");
-// const todaysWeather = document.getElementById("todays-weather");
-// const cityName = document.getElementById("display-city-name");
-// const temperature = document.getElementById("display-temperature");
-// const dailyHigh = document.getElementById("display-daily-high");
-// const dailyLow = document.getElementById("display-daily-low");
-// const skies = document.getElementById("display-skies")
-// const humidity = document.getElementById("display-humidity");
+const todaysWeather = document.getElementById("todays-weather");
+const cityName = document.getElementById("display-city-name");
+const displayDate = document.getElementById("display-date");
+const temperature = document.getElementById("display-temperature");
+const weatherIcon = document.getElementById("weather-icon")
+const dailyHigh = document.getElementById("display-daily-high");
+const dailyLow = document.getElementById("display-daily-low");
+const skies = document.getElementById("display-skies")
+const humidity = document.getElementById("display-humidity");
 const futureInformation = document.getElementById("future-information");
 const currentWeather = document.querySelector(".current-weather");
 const futureInformationSection = document.querySelector(".future-information-section");
+const windSpeed = document.getElementById("wind-speed");
 // const historyDropDown = document.getElementById("history-dropdown");
 const historyDropDown = document.getElementById("history");
 let historyOption = document.createElement("option");
@@ -84,46 +87,53 @@ const returnCurrentForecast = async (event) => {
     try {
         response = await fetch(url);
         data = await response.json();
-        // console.log(data);
+        console.log(data);
 
-        //!Old way from HTML
-        //! temperature.innerText = `Current Temperature (F): ${data.main.temp}`;
-        //! console.log(data.main.temp)
-        //?Display the current temperature from JS
-        let displayTemperature = document.createElement("p");
-        // displayTemperature.setAttribute("id", "display-temperature");
-        displayTemperature.innerText = `Current Temperature (F): ${data.main.temp}`;
-        document.querySelector(".todays-weather-specs").appendChild(displayTemperature);
+        // city name 
+        //&  data.name
 
-        //!Display the daily high
-        //!dailyHigh.innerText = `High: ${data.main.temp_max}`
-        //! console.log(data.main.temp_max)
-        //? Display the daily high in JS
-        let displayDailyHigh = document.createElement("p");
-        displayDailyHigh.innerText = `High: ${data.main.temp_max}`;
-        document.querySelector(".todays-weather-specs").appendChild(displayDailyHigh);
+        // the date 
+        //& dayjs().$d.substring(0, 6) ((May have to adjust second argument number))
 
-        //! Display the daily Low
-        //! dailyLow.innerText = `Low: ${data.main.temp_min}`
-        //! console.log(data.main.temp_min)
-        //? Display the daily low
-        let displayDailyLow = document.createElement("p");
-        displayDailyLow.innerText = `Low: ${data.main.temp_min}`;
-        document.querySelector(".todays-weather-specs").appendChild(displayDailyLow);
+        // an icon representation of weather conditions 
+        //& self-explanatory
 
-        //!Display the skies
-        //!skies.innerText = `Skies: ${data.weather[0].description}`
-        //!console.log(data.weather[0].description)
-        let displaySkies = document.createElement("p");
-        displaySkies.innerText = `Skies: ${data.weather[0].description}`;
-        document.querySelector(".todays-weather-specs").appendChild(displaySkies);
+        // the temperature 
+        //& data.main.temp
 
-        //!Display Humidity
-        //!humidity.innerText = `Humidity: ${data.main.humidity}%`
-        //!console.log(data.main.humidity)
-        let displayHumidity = document.createElement("p");
-        displayHumidity.innerText = `Humidity: ${data.main.humidity}%`;
-        document.querySelector(".todays-weather-specs").appendChild(displayHumidity);
+        // the humidity 
+        //& data.main.humidity
+
+        //wind speed
+        //& data.wind[0]
+
+
+        //Display city name
+        cityName.innerText = `${data.name}`;
+        console.log(data.name)
+
+        //Display the date
+        displayDate.innerText = `${dayjs().$d.toString().substring(0, 10)}`;
+        console.log(dayjs().$d.toString().substring(0, 6))
+
+        //Display Weather icon here
+
+        //Display temperature
+        temperature.innerText = `Current Temperature (F): ${data.main.temp}`;
+        console.log(data.main.temp)
+
+        //Display humidity
+        humidity.innerText = `Humidity: ${data.main.humidity}%`;
+        console.log(data.main.humidity)
+
+
+        //Display Wind Speed
+        windSpeed.innerText = `Wind Speed: ${data.wind.speed}mph`;
+        console.log(data.wind.speed)
+
+
+
+
 
         // addToHistory(userPicksCity);
     } catch (error) {
@@ -146,14 +156,13 @@ const returnFiveDayForecast = async (event) => {
         //Array 4 is noon for the next day, (+8 for each day noon data)
         // BELOW WORKS WITHOUT ADDING ANYTHING TO THE HTML
 
+        // console.log(data);
         let generatedCols = '';
         for (let i = 3; i <= 36; i += 8 ) {
             generatedCols+= 
-                `<div class="col-2">
-                        <p>Date: ${data.list[i].dt_txt}</p>
+                `<div class="col-sm-4">
+                        <p>Date: ${data.list[i].dt_txt.substring(0, 10)}</p>
                         <p>Temperature: ${data.list[i].main.temp}</p>
-                        <p>Daily High: ${data.list[i].main.temp_max}</p>
-                        <p>Daily Low: ${data.list[i].main.temp_min}</p>
                         <p>Skies: ${data.list[i].weather[0].description}</p>
                         <p>Humidity: ${data.list[i].main.humidity}</p>
                     </div>
@@ -191,61 +200,3 @@ submitButton.addEventListener('click', completeWeatherForecast);
 // historyArrayOfButtons.forEach(button => {
 //     button.addEventListener('click', () =>)
 // })
-
-
-
-
-
-
-//Response example
-// {
-//     "coord": {
-//       "lon": 10.99,
-//       "lat": 44.34
-//     },
-//     "weather": [
-//       {
-//         "id": 501,
-//         "main": "Rain",
-//         "description": "moderate rain",
-//         "icon": "10d"
-//       }
-//     ],
-//     "base": "stations",
-//     "main": {
-//       "temp": 298.48,
-//       "feels_like": 298.74,
-//       "temp_min": 297.56,
-//       "temp_max": 300.05,
-//       "pressure": 1015,
-//       "humidity": 64,
-//       "sea_level": 1015,
-//       "grnd_level": 933
-//     },
-//     "visibility": 10000,
-//     "wind": {
-//       "speed": 0.62,
-//       "deg": 349,
-//       "gust": 1.18
-//     },
-//     "rain": {
-//       "1h": 3.16
-//     },
-//     "clouds": {
-//       "all": 100
-//     },
-//     "dt": 1661870592,
-//     "sys": {
-//       "type": 2,
-//       "id": 2075663,
-//       "country": "IT",
-//       "sunrise": 1661834187,
-//       "sunset": 1661882248
-//     },
-//     "timezone": 7200,
-//     "id": 3163858,
-//     "name": "Zocca",
-//     "cod": 200
-//   }
-
-

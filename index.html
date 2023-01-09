@@ -13,19 +13,19 @@
 
   <!-- Header -->
   <body>
+    <!-- The introduction -->
     <header class=".text-center">
-      <!-- <div class="container mt-5 mb-3"> -->
         <div class="row mt-5 mb-3 w-50 mx-auto title">
           <h1>Ked's Wicked Weather WApp</h1>
           <p>Go ahead, throw a city back and select the information you want to use!</p>
-        <!-- </div> -->
       </div>
     </header>
       
     <div class="row main-section mt-3">
 
-      <div class="col-3 px-5">
-        <div class="row input-column">
+      <!-- The location where the weather will be displayed -->
+      <div class="col-3 px-5 mw-100">
+        <div class="row input-column w-auto">
           <form id="form">
             <h2>Enter the city and country name</h2>
             <p><em>Example: Caguas, Puerto Rico</em></p>
@@ -42,11 +42,11 @@
         </div>
       </div>
 
+      <!-- The section for the current forecast -->
       <div class="col current-weather">
           <div class="row row-weather">
             <h2 id="todays-weather">Today's Weather:</h2>
               <div class="col todays-weather-specs h-25">
-
                 <!-- Display city name -->
                 <p><strong><span id="display-city-name"></strong></span></p>
 
@@ -72,24 +72,21 @@
               </div>
           </div>
 
+          <!-- The section for the future forecast -->
           <div class="row row-weather">
             <h1>Future Forecast:</h1>
               <div class="col future-information-section future-forecast">
-                <!-- Display the fu -->
-                <!-- <div class="row "></div> -->
             </div>
           </div>
       </div>
 
-      <!-- <div class="col future-forecast"></div>     -->
     </div>
-
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="./assets/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
     <script>dayjs().format()</script>

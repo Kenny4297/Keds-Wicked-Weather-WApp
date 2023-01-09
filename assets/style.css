@@ -1,3 +1,4 @@
+/* THE PAGE AS A WHOLE */
 /* Fonts */
 @font-face {
     font-family: 'Playfair Display';
@@ -8,8 +9,6 @@
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
-
-
 * {
     box-sizing: border-box;
     margin-left: 10px;
@@ -17,33 +16,22 @@
     font-family: 'Playfair Display';
 }
 
-.row, [class*="row-"] {
-    outline: 2px solid red;
+body {
+    background-color: rgb(250, 238, 240);
 }
 
-/* This selects all the columns in Bootstrap for better display */
 .col, [class*="col-"] {
     text-align: center;
-    outline: 2px solid blue;
 }
 
+.hidden {
+    display: none;
+}
+
+/* Header */
 header {
     display: flex;
     text-align: center;
-}
-
-.todays-weather-specs {
-    line-height: .8;
-}
-
-.current-weather {
-    background-color: rgb(236, 236, 178);
-}
-
-body {
-    /* outline: 2px solid orange; */
-    /* display: flex; */
-    background-color: rgb(250, 238, 240);
 }
 
 .title {
@@ -55,15 +43,25 @@ body {
     border-bottom: 2px solid green;
 }
 
-.history-row {
-    text-align: center;
-    /* margin: 0 auto; */
+/* Current Forecast */
+.main-section {
     justify-content: center;
-    background-color: rgb(227, 236, 227);
-
 }
 
-.history-column {
+.todays-weather-specs {
+    line-height: .8;
+    border: 2px dashed green;
+    margin: auto;
+}
+
+.current-weather {
+    background-color: rgb(236, 236, 178);
+}
+
+.history-row {
+    /* text-align: center; */
+    justify-content: center;
+    background-color: rgb(227, 236, 227);
 }
 
 .history-item {
@@ -74,16 +72,20 @@ body {
 
 .icon-images {
     width: 80px;
-    /* text-align: center; */
     margin: 0 auto;
 }
 
-.hidden {
-    display: none;
+.input-column {
+    background-color: rgb(207, 207, 241);
 }
 
+#form {
+    display: block;
+    margin: 0 auto;
+}
+
+/* Future Forecast */
 .future-information-section {
-    /* justify-content: space-evenly; */
     color: green;
     display: inline-block;
 }
@@ -91,32 +93,6 @@ body {
 #display-city-name {
     font-size: 30px;
     text-decoration: underline;
-}
-
-.main-section {
-    justify-content: center;
-}
-
-.input-column {
-    background-color: rgb(207, 207, 241);
-}
-.input-row {
-    text-align: center;
-}
-
-#form {
-    display: block;
-    /* width: 150%; */
-    margin: 0 auto;
-}
-
-.history {
-    display: flex;
-    flex-direction: column;
-}
-
-.history p {
-    margin: 0 auto;
 }
 
 .row-weather {

@@ -1,26 +1,18 @@
 const apiKey = '0c8087e93b7bd6b5e9d6fbd5daee1b51';
 
 //DOM variables
-// const body = document.getElementsByTagName("body");
-// const todaysWeather = document.getElementById("todays-weather");
 const cityName = document.getElementById("display-city-name");
 const displayDate = document.getElementById("display-date");
 const temperature = document.getElementById("display-temperature");
 const weatherIcon = document.getElementById("weather-icon");
-
-// const dailyHigh = document.getElementById("display-daily-high");
 const dailyLow = document.getElementById("display-daily-low");
 const skies = document.getElementById("display-skies");
 const humidity = document.getElementById("display-humidity");
-// const futureInformation = document.getElementById("future-information");
 const currentWeather = document.querySelector(".current-weather");
 const futureInformationSection = document.querySelector(".future-information-section");
 const windSpeed = document.getElementById("wind-speed");
-// const historyDropDown = document.getElementById("history");
-// let historyOption = document.createElement("option");
 const userInput = document.getElementById("input-bar");
 const historyRow = document.querySelector(".history-row");
-
 let userPicksCity = document.getElementById("input-bar").value;
 
 //Setting up the user error warning
@@ -29,14 +21,11 @@ userErrorWarning.setAttribute("id", "user-error-warning");
 userErrorWarning.innerHTML = `<p>Sorry, your request was inadequate. Either the city you entered doesn't exist in our system, or you messed up. Please try again, either with a map or a dictionary, or quite possibly, both.</p>`;
 document.querySelector(".input-column").appendChild(userErrorWarning);
 
-//Buttons
+//Submit Button
 const submitButton = document.getElementById("submit");
 
 //Resting Home Page
 document.querySelector(".future-forecast").classList.add("hidden");
-
-let count = 0;
-
 currentWeather.classList.add('hidden');
 historyRow.classList.add('hidden');
 userErrorWarning.classList.add('hidden');
@@ -46,11 +35,10 @@ const userErrorFunction = () => {
     currentWeather.classList.add('hidden');
     historyRow.classList.add('hidden');
     userErrorWarning.classList.remove('hidden');
-
 }
 
+//Adding the options to their history
 let historyArrayOfButtons = [];
-
 const addToHistory = (event) => {
     let userPicksCity = document.getElementById("input-bar").value;
  
@@ -114,12 +102,12 @@ const returnCurrentForecast = async (city) => {
 
 // Get the next five Days Forecast
 const returnFiveDayForecast = async (city) => {
-        let userPicksCity = document.getElementById("input-bar").value;
     const url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=imperial`;
     try {
         response = await fetch(url);
         data = await response.json();
 
+        //Creating the future forecast section
         let generatedCols = '';
         for (let i = 3; i <= 36; i += 8 ) {
             generatedCols+= 
@@ -138,6 +126,7 @@ const returnFiveDayForecast = async (city) => {
     }
 };
 
+//The single function for running both current and future forecast
 const completeWeatherForecast = async (userPicksCity) => {
     currentWeather.classList.remove('hidden');
 
@@ -150,12 +139,12 @@ const completeWeatherForecast = async (userPicksCity) => {
 };
 
 
-//Regular button
+//Submit button event listener
 submitButton.addEventListener('click', (event) => {
     event.preventDefault();
 
     let userPicksCity = document.getElementById("input-bar").value;
 
-    completeWeatherForecast(userPicksCity)
+    completeWeatherForecast(userPicksCity);
 });
 

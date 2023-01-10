@@ -104,7 +104,7 @@ header {
     display: inline-block;
     background: pink;
     border-radius: 20px;
-    padding-left: -100px;
+    /* padding-left: -100px; */
     text-align: center;
 }
 

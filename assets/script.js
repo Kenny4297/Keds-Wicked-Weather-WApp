@@ -111,7 +111,7 @@ const returnFiveDayForecast = async (city) => {
         let generatedCols = '';
         for (let i = 3; i <= 36; i += 8 ) {
             generatedCols+= 
-            `<div class="card future-forecast-css">
+            `<div class="row card future-forecast-css">
                 <p><u>${data.list[i].dt_txt.substring(0, 10)}</u></p>
                 <p>Temperature: ${data.list[i].main.temp}&deg;F</p>
                 <img class="icon-images" src='http://openweathermap.org/img/w/${data.list[i].weather[0].icon}.png'>

@@ -105,4 +105,11 @@ header {
     background: pink;
     border-radius: 20px;
     padding-left: -100px;
+    text-align: center;
+}
+
+.skies-description {
+    display: block;
+    width: 200px;
+    text-align: center;
 }

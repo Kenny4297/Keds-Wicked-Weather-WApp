@@ -111,15 +111,15 @@ const returnFiveDayForecast = async (city) => {
         let generatedCols = '';
         for (let i = 3; i <= 36; i += 8 ) {
             generatedCols+= 
-            `<div class="card col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 mx-0 my-0 future-forecast-css" >
+            `<div class="card future-forecast-css">
                 <p><u>${data.list[i].dt_txt.substring(0, 10)}</u></p>
                 <p>Temperature: ${data.list[i].main.temp}&deg;F</p>
                 <img class="icon-images" src='http://openweathermap.org/img/w/${data.list[i].weather[0].icon}.png'>
-                <p>Skies: ${data.list[i].weather[0].description}</p>
+                <p class="skies-description">Skies: ${data.list[i].weather[0].description}</p>
                 <p>Humidity: ${data.list[i].main.humidity}</p>
             </div>
             `;
-
+            // col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 mx-0 my-0 
             futureInformationSection.innerHTML = generatedCols;
             }
         } catch (error) {

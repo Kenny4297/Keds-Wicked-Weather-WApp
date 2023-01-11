@@ -15,6 +15,8 @@ const userInput = document.getElementById("input-bar");
 const historyRow = document.querySelector(".history-row");
 let userPicksCity = document.getElementById("input-bar").value;
 
+const historyButton = document.getElementById("history-item");
+
 //Setting up the user error warning
 let userErrorWarning = document.createElement("p");
 userErrorWarning.setAttribute("id", "user-error-warning");
@@ -27,7 +29,7 @@ const submitButton = document.getElementById("submit");
 //Resting Home Page
 document.querySelector(".future-forecast").classList.add("hidden");
 currentWeather.classList.add('hidden');
-historyRow.classList.add('hidden');
+// historyRow.classList.add('hidden');
 userErrorWarning.classList.add('hidden');
 
 //Display to the user what happens if the city doesn't exist
@@ -37,24 +39,43 @@ const userErrorFunction = () => {
     userErrorWarning.classList.remove('hidden');
 }
 
-//Adding the options to their history
-let historyArrayOfButtons = [];
-const addToHistory = (event) => {
+let historyArrayOfButtons = [''];
+
+localStorageHistory = JSON.parse(localStorage.getItem("History"))
+
+if (!localStorageHistory) {
+    localStorageHistory = []
+}
+
+for (let i = 0; i < localStorageHistory.length; i++) {
+    let historyButton = document.createElement("button");
+    historyButton.setAttribute("class", "history-item");
+    historyButton.innerText = localStorageHistory[i];
+    document.querySelector(".history").append(historyButton);
+
+    historyButton.addEventListener('click', (event) => {
+        event.preventDefault();
+        console.log(`Line 70: History event button firing`)
+        completeWeatherForecast(historyButton.innerText);
+    })
+}
+
+const addToHistory = () => {
+    // event.preventDefault();
+
     let userPicksCity = document.getElementById("input-bar").value;
  
-    if (!(historyArrayOfButtons.includes(userPicksCity))) {
+    if (!historyArrayOfButtons.includes(userPicksCity)) {
         historyArrayOfButtons.push(userPicksCity);
 
-        //Creating a new button
+        localStorageHistory.push(userPicksCity);
+
         let cityHistoryButton = document.createElement("button");
-
-        //Setting the class to that specific button
         cityHistoryButton.setAttribute("class", "history-item");
-
-        //Adding the button text
-        cityHistoryButton.innerText = `${userPicksCity}`;
-
+        cityHistoryButton.innerText = userPicksCity;
         document.querySelector(".history").append(cityHistoryButton);
+
+        localStorage.setItem("History", JSON.stringify(localStorageHistory))
 
         //Submit button for city history
         cityHistoryButton.addEventListener('click', (event) => {
@@ -63,6 +84,8 @@ const addToHistory = (event) => {
         })
     }
 }
+
+//Retrieving the data from local storage
 
 //Get the current day's forecast
 const returnCurrentForecast = async (city) => {
@@ -116,7 +139,8 @@ const returnFiveDayForecast = async (city) => {
                 <p>Temperature: ${data.list[i].main.temp}&deg;F</p>
                 <img class="icon-images" src='http://openweathermap.org/img/w/${data.list[i].weather[0].icon}.png'>
                 <p class="skies-description">Skies: ${data.list[i].weather[0].description}</p>
-                <p>Humidity: ${data.list[i].main.humidity}</p>
+                <p>Wind Speed: ${data.list[i].wind.speed} mph</p>
+                <p>Humidity: ${data.list[i].main.humidity}%</p>
             </div>
             `;
             // col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 mx-0 my-0 
@@ -138,7 +162,6 @@ const completeWeatherForecast = async (userPicksCity) => {
     let secondPromise = await returnFiveDayForecast(userPicksCity);
 };
 
-
 //Submit button event listener
 submitButton.addEventListener('click', (event) => {
     event.preventDefault();
@@ -147,4 +170,12 @@ submitButton.addEventListener('click', (event) => {
 
     completeWeatherForecast(userPicksCity);
 });
+
+
+
+
+
+
+// document.querySelector(".history").append(localStorage.getItem("History", localStorage[0]));
+
 

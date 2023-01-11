@@ -52,6 +52,7 @@ header {
     line-height: .8;
     border: 2px dashed green;
     margin: auto;
+    width: 50%;
 }
 
 .current-weather {

@@ -29,7 +29,6 @@ const submitButton = document.getElementById("submit");
 //Resting Home Page
 document.querySelector(".future-forecast").classList.add("hidden");
 currentWeather.classList.add('hidden');
-// historyRow.classList.add('hidden');
 userErrorWarning.classList.add('hidden');
 
 //Display to the user what happens if the city doesn't exist
@@ -41,6 +40,7 @@ const userErrorFunction = () => {
 
 let historyArrayOfButtons = [''];
 
+//Setting local storage if there is any
 localStorageHistory = JSON.parse(localStorage.getItem("History"))
 
 if (!localStorageHistory) {
@@ -61,8 +61,6 @@ for (let i = 0; i < localStorageHistory.length; i++) {
 }
 
 const addToHistory = () => {
-    // event.preventDefault();
-
     let userPicksCity = document.getElementById("input-bar").value;
  
     if (!historyArrayOfButtons.includes(userPicksCity)) {
@@ -84,8 +82,6 @@ const addToHistory = () => {
         })
     }
 }
-
-//Retrieving the data from local storage
 
 //Get the current day's forecast
 const returnCurrentForecast = async (city) => {
@@ -170,12 +166,3 @@ submitButton.addEventListener('click', (event) => {
 
     completeWeatherForecast(userPicksCity);
 });
-
-
-
-
-
-
-// document.querySelector(".history").append(localStorage.getItem("History", localStorage[0]));
-
-

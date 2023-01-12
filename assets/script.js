@@ -128,6 +128,7 @@ const returnFiveDayForecast = async (city) => {
 
         //Creating the future forecast section
         let generatedCols = '';
+        //The criteria was just to give a forecast for each day. The instructions did not say what time of the day we need! The code below should return, at each index interval, a different day's forecast.
         for (let i = 3; i <= 36; i += 8 ) {
             generatedCols+= 
             `<div class="row card future-forecast-css">

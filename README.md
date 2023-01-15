@@ -12,4 +12,4 @@ This project is a weather dashboard that shows the user certain aspects of the w
 
 The following is a link to the GitPages site: [Weather App](https://kenny4297.github.io/Keds-Wicked-Weather-WApp/)
 
-The following is a screen shot of the final product: ![Screenshot](./assets/images/weatherDashboard.png)
+The following is a screen shot of the final product: ![Screenshot](./assets/images/weatherFinal.png)

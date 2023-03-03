@@ -1,4 +1,4 @@
-# Ked's Wicked Weather WApp
+# Ked's Weather App
 
 ## What is this project?
 This project is a weather dashboard that shows the user certain aspects of the weather in any city of their choosing.

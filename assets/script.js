@@ -47,6 +47,7 @@ if (!localStorageHistory) {
     localStorageHistory = []
 }
 
+//Setting the local storage when the page refreshed
 for (let i = 0; i < localStorageHistory.length; i++) {
     let historyButton = document.createElement("button");
     historyButton.setAttribute("class", "history-item");

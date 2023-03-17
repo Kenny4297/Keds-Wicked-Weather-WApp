@@ -1,9 +1,9 @@
+# Ked's Weather App
+![Screenshot](./assets/images/weatherFinal.png)
+
 ### Licenses
 * License Badge: [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 * Link for license Badge: https://opensource.org/licenses/MIT
-
-# Ked's Weather App
-![Screenshot](./assets/images/weatherFinal.png)
 
 ## What is this project?
 This project is a weather dashboard that shows the user certain aspects of the weather in any city of their choosing. I used 

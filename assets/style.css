@@ -66,9 +66,9 @@ header {
 }
 
 .history-item {
-    width: 60%;
+    width: 15vw;
     margin: 0 auto;
-    margin: 10px auto;
+    margin: 10px 10px;
 }
 
 .icon-images {
